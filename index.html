@@ -8,20 +8,49 @@
 </head>
 <body>
     <div id="root"></div>
+    <div id="root2"></div>
 </body>
     <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
-    <script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
         const root = document.getElementById("root");
-        const h3 = React.createElement("h3"
-        ,{id:"sexy-h3",style:{color:"red"}
-        ,onMouseEnter:()=>console.log("mouse enter")}
-        ,"Hello");
-        ReactDOM.render(h3, root);
-        const btn = React.createElement("button", {
-            onClick:()=> console.log("Clicked")
-        }, "Click me");
-        const container = React.createElement("div", null,[h3,btn]);
+        const root2 = document.getElementById("root2");
+        // const h3 = React.createElement("h3"
+        // ,{id:"sexy-h3",style:{color:"red"}
+        // ,onMouseEnter:()=>console.log("mouse enter")}
+        // ,"Hello");
+        const H3 = ()=>(
+            <h3 id="sexy-h3" 
+            style={{
+                color:"red"
+            }}
+            onMouseEnter = {()=>console.log("mouse enter")
+            }
+            >
+            Hello
+            </h3>
+        );
+        ReactDOM.render(<H3 />, root2);
+        // const btn = React.createElement("button", {
+        //     onClick:()=> console.log("Clicked")
+        // }, "Click me");
+        const Btn = ()=>(
+            <button 
+            onClick={()=> console.log("Clicked")}
+            >
+            Click me
+            </button>
+        );
+
+        //const container = React.createElement("div", null,[h3,btn]);
+        const container = (
+            <div>
+                <H3 /> 
+                <Btn />
+            </div>
+        );
+        // html 요소가 아니라면 첫번째 글자를 대문자로
         ReactDOM.render(container, root);
     </script>
 </html>
