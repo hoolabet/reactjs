@@ -15,15 +15,35 @@
     <script type="text/babel">
         const root = document.getElementById("root");
         function App(){
-            const [counter, setCounter] = React.useState(0);
-            const onClick = () => {
-                //setCounter(counter + 1);
-                setCounter((current) => current + 1);
-            }
+            const [minutes,setMinutes] = React.useState(0);
+            const onChange = (event) =>{
+                setMinutes(event.target.value);
+            };
+            const reset = () => setMinutes(0);
             return (
                 <div>
-                    <h3>Total click: {counter}</h3>
-                    <button onClick={onClick}>Click me</button>
+                    <div>
+                        <h1 className="hi">Super Converter</h1>
+                        <label htmlfor="minutes">Minutes</label>
+                        <input
+                            value={minutes} 
+                            id="minutes" 
+                            placeholder="Minutes" 
+                            type="number" 
+                            onChange={onChange}
+                        />
+                    </div>
+                    <div>
+                        <label htmlfor="hours">Hours</label>
+                        <input 
+                            value={minutes/60}
+                            id="hours" 
+                            placeholder="Hours" 
+                            type="number" 
+                            disabled
+                        />
+                    </div>
+                    <button onClick={reset}>Reset</button>
                 </div>
             );
         }
