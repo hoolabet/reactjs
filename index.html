@@ -9,35 +9,37 @@
 <body>
     <div id="root"></div>
 </body>
-    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
-        function Btn({hoola, propOnClick}){
+        function Btn({text, fontSize = 10}){ // undefined 일 때 값을 줄 수 있다.
             return (
                 <button
-                    onClick={propOnClick}
                     style={{
                         backgroundColor: "tomato",
                         color: "white",
                         padding: "10px 20px",
                         border: 0,
                         borderRadius: 10,
-                        
+                        fontSize,
                         }}
                 >
-                {hoola}
+                {text}
                 </button>
             );
         }
-        const MemorizedBtn = React.memo(Btn);
+        Btn.propTypes = { // props의 타입이 맞는지 확인 시켜준다
+            text: PropTypes.string.isRequired, // 필수적으로 있어야 작동시킴
+            fontSize: PropTypes.number,
+        }
         function App(){
-            const [value, setValue] = React.useState("Save Changes");
-            const changeValue = () => setValue("Revert Changes");
+            
             return (
                 <div>
-                   <MemorizedBtn hoola= {value} propOnClick={changeValue} />
-                   <MemorizedBtn hoola="Continue" />
+                   <Btn text="Save Changes" fontSize={20} />
+                   <Btn text={"00"} />
                 </div>        
             );
         }
